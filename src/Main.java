@@ -17,21 +17,25 @@ public class Main {
 
         ArrayList<Integer[]> colorsTargets = new ArrayList<>();
 
-        colorsTargets.add(new Integer[]{255, 32, 4, 0, 5});
-        colorsTargets.add(new Integer[]{150, 52, 5, 8, 25});
-        colorsTargets.add(new Integer[]{200, 2, 57, 20, 32});
-        colorsTargets.add(new Integer[]{100, 20, 0, 0, 80});
+
+        colorsTargets.add(new Integer[]{250, 200, 150, 100, 225});
+        colorsTargets.add(new Integer[]{50, 30, 20, 25, 10});
+        colorsTargets.add(new Integer[]{100, 75,  100, 50, 30});
+        colorsTargets.add(new Integer[]{240, 100, 125, 75, 150});
+        colorsTargets.add(new Integer[]{15, 10, 10, 10, 5});
 
 
 
         Palette palette = new Palette(colorsTargets);
 
-        for (Integer[] integers : colorsTargets) {
-            System.out.println(Arrays.toString(integers));
-        }
+//        for (Integer[] integers : colorsTargets) {
+//            System.out.println(Arrays.toString(integers));
+//        }
 
-        /*for(int i = 0; i < palette.getColorsPalette().length; i++) {
-            System.out.println(Arrays.toString(palette.getColorsPalette()[i]));
-        }*/
+        palette.calc();
+
+       for(int i = 0; i < palette.getColorsPalette().length; i++) {
+           System.out.println("Posicion "+i+":"+Arrays.toString(palette.getColorsPalette()[i]));
+        }
     }
 }
