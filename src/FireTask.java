@@ -1,19 +1,25 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.swing.*;
 
-public class Main {
+public class FireTask extends JFrame {
+
+    public FireTask() {
+        this.setSize(500,500);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
     public static void main(String[] args) {
-        /*int width = 10;
+        FireTask test = new FireTask();
+        /*
+        int width = 10;
         int height = 4;
         double coldPoints = 0.1;
         double sparks = 0.3;
-
 
         Temperatures test = new Temperatures(width, height, coldPoints, sparks);
 
         test.next();
 
-        test.printArray();*/
+        test.printArray();
 
         ArrayList<Integer[]> colorsTargets = new ArrayList<>();
 
@@ -28,14 +34,17 @@ public class Main {
 
         Palette palette = new Palette(colorsTargets);
 
-//        for (Integer[] integers : colorsTargets) {
-//            System.out.println(Arrays.toString(integers));
-//        }
+        for (Integer[] integers : colorsTargets) {
+            System.out.println(Arrays.toString(integers));
+        }
 
         palette.calc();
 
        for(int i = 0; i < palette.getColorsPalette().length; i++) {
            System.out.println("Posicion "+i+":"+Arrays.toString(palette.getColorsPalette()[i]));
         }
+        */
+
+
     }
 }

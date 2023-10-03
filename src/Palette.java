@@ -23,7 +23,7 @@ public class Palette {
                         int firstValue = this.colorsTargets.get(i)[k+1];
                         int lastValue = this.colorsTargets.get(i+1)[k+1];
 
-                        double value = j * ((lastValue - firstValue) / (double) (spaceBetween));
+                        double value = j * ((lastValue - firstValue) / (double) (spaceBetween+1));
 
                         this.colorsPalette[firstPosition+j][k] = firstValue + (int) value;
                     }
