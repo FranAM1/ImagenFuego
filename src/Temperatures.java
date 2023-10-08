@@ -1,71 +1,62 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Temperatures {
-    private ArrayList<Integer[]> arrayTemperatures;
+    private int[][] temperatures;
     private int width;
     private int height;
-    private double percentageColdPoints;
-    private double percentageSparks;
+    private double coldPointsPercentage;
+    private double sparksPercentage;
 
     public Temperatures(int width, int height, double percentageColdPoints, double percentageSparks) {
         this.setWidth(width);
         this.setHeight(height);
-        this.setPercentageColdPoints(percentageColdPoints);
-        this.setPercentageSparks(percentageSparks);
-        this.setArrayTemperatures(this.generateArray(width, height));
-    }
-
-    private ArrayList<Integer[]> generateArray(int width, int height){
-        ArrayList<Integer[]> array = new ArrayList<Integer[]>();
-
-        for(int i = 0; i < height; i++) {
-            Integer[] row = new Integer[width];
-            Arrays.fill(row, 0);
-            array.add(row);
-        }
-
-        return array;
+        this.setColdPointsPercentage(percentageColdPoints);
+        this.setSparksPercentage(percentageSparks);
+        this.setTemperatures(new int[height][width]);
     }
 
     public void printArray() {
         for(int i = 0; i < height;i++){
-            System.out.println(Arrays.toString(this.getArrayTemperatures().get(i)));
+            System.out.println(Arrays.toString(this.temperatures[i]));
         }
     }
 
     public void next() {
-        coldPoints();
-        sparks();
+        creatColdPoints();
+        createSparks();
         calc();
-    }
+   }
 
-    private void sparks() {
+   public int getTemp(int x, int y){
+        return this.temperatures[y][x];
+   }
+
+    private void createSparks() {
         for(int i = 0; i < this.getWidth(); i++) {
             double random = Math.random();
 
-            if(random < this.getPercentageSparks()) {
-                this.getArrayTemperatures().get(this.getHeight()-1)[i] = 255;
+            if(random < this.sparksPercentage) {
+                this.temperatures[height-1][i] = 255;
             }
         }
     }
 
-    private void coldPoints() {
+    private void creatColdPoints(){
         for(int i = 0; i < this.getWidth(); i++) {
             double random = Math.random();
 
-            if(random < this.getPercentageColdPoints()) {
-                this.getArrayTemperatures().get(this.getHeight()-1)[i] = 0;
+            if(random < this.coldPointsPercentage) {
+                this.temperatures[height-1][i] = 0;
             }
         }
     }
 
     private void calc() {
-        ArrayList<Integer[]> array = this.getArrayTemperatures();
+        int[][] array = this.temperatures;
 
-        for(int i = this.getHeight()-2; i > -1;i--) {
-            Integer[] row = array.get(i);
-            Integer[] underRow = array.get(i+1);
+        for(int i = this.height-2; i > -1;i--) {
+            int[] row = array[i];
+            int[] underRow = array[i+1];
 
             for(int j = 0; j < this.getWidth();j++) {
                 int value = row[j];
@@ -99,27 +90,28 @@ public class Temperatures {
         this.height = height;
     }
 
-    public ArrayList<Integer[]> getArrayTemperatures() {
-        return arrayTemperatures;
-    }
-    public void setArrayTemperatures(ArrayList<Integer[]> arrayTemperatures) {
-        this.arrayTemperatures = arrayTemperatures;
+    public double getColdPointsPercentage() {
+        return coldPointsPercentage;
     }
 
-    public double getPercentageColdPoints() {
-        return percentageColdPoints;
+    public void setColdPointsPercentage(double coldPointsPercentage) {
+        this.coldPointsPercentage = coldPointsPercentage;
     }
 
-    public void setPercentageColdPoints(double percentageColdPoints) {
-        this.percentageColdPoints = percentageColdPoints;
+    public double getSparksPercentage() {
+        return sparksPercentage;
     }
 
-    public double getPercentageSparks() {
-        return percentageSparks;
+    public void setSparksPercentage(double sparksPercentage) {
+        this.sparksPercentage = sparksPercentage;
     }
 
-    public void setPercentageSparks(double percentageSparks) {
-        this.percentageSparks = percentageSparks;
+    public int[][] getTemperatures() {
+        return temperatures;
+    }
+
+    public void setTemperatures(int[][] temperatures) {
+        this.temperatures = temperatures;
     }
 
 

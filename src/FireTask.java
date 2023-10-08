@@ -1,12 +1,14 @@
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FireTask extends JFrame {
-    private Type field;
+    private Viewer viewer;
+    private FireAnimation fa;
+
 
     public static void main(String[] args) {
-
-
-        /*
         int width = 10;
         int height = 4;
         double coldPoints = 0.1;
@@ -18,29 +20,24 @@ public class FireTask extends JFrame {
 
         test.printArray();
 
-        ArrayList<Integer[]> colorsTargets = new ArrayList<>();
+
+        ArrayList<ColorTarget> colorsTargets = new ArrayList<>();
+
+        colorsTargets.add(new ColorTarget(250,new Color( 230, 200, 210, 225)));
+        colorsTargets.add(new ColorTarget(200,new Color( 180, 150, 175, 200)));
+        colorsTargets.add(new ColorTarget(150,new Color( 150, 100, 150, 175)));
+        colorsTargets.add(new ColorTarget(100,new Color( 100, 50, 100, 150)));
 
 
-        colorsTargets.add(new Integer[]{250, 200, 150, 100, 225});
-        colorsTargets.add(new Integer[]{50, 30, 20, 25, 10});
-        colorsTargets.add(new Integer[]{100, 75,  100, 50, 30});
-        colorsTargets.add(new Integer[]{240, 100, 125, 75, 150});
-        colorsTargets.add(new Integer[]{15, 10, 10, 10, 5});
+        ColorPalette palette = new ColorPalette(colorsTargets);
 
-
-
-        Palette palette = new Palette(colorsTargets);
-
-        for (Integer[] integers : colorsTargets) {
-            System.out.println(Arrays.toString(integers));
-        }
 
         palette.calc();
 
        for(int i = 0; i < palette.getColorsPalette().length; i++) {
            System.out.println("Posicion "+i+":"+Arrays.toString(palette.getColorsPalette()[i]));
         }
-        */
+
 
 
     }
