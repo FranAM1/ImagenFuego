@@ -1,14 +1,11 @@
 import javax.swing.*;
 
 public class FireTask extends JFrame {
+    private Type field;
 
-    public FireTask() {
-        this.setSize(500,500);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
     public static void main(String[] args) {
-        FireTask test = new FireTask();
+
+
         /*
         int width = 10;
         int height = 4;
