@@ -73,7 +73,7 @@ public class ColorPalette {
         }
         return colors;
     }
-    public int[][] getColorsPalette() {
+    public int[][] getColorsPalette(){
         return colorsPalette;
     }
 
