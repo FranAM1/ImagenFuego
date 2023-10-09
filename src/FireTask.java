@@ -7,11 +7,39 @@ public class FireTask extends JFrame {
     private Viewer viewer;
     private FireAnimation fa;
 
+    public FireTask() {
+        this.configureJFrame();
+        this.addUIComponents();
+        this.setVisible(true);
+        this.pack();
+    }
+
+    private void addUIComponents(){
+        Container panel;
+
+        panel = this.getContentPane();
+        this.addViewerToPane(panel);
+
+    }
+
+    private void configureJFrame(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void addViewerToPane(Container panel) {
+        this.viewer = new Viewer(700, 700);
+        panel.add(this.viewer);
+    }
+
     public void run(){
         this.fa.run();
     }
 
     public static void main(String[] args) {
+        FireTask ft = new FireTask();
+
+
+
 //        int width = 10;
 //        int height = 4;
 //        double coldPoints = 0.1;

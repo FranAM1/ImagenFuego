@@ -24,12 +24,13 @@ public class Viewer extends Canvas {
             System.err.println("Error loading background. ");
             System.err.println(e);
         }
+
+
     }
 
 
     @Override
     public void paint(Graphics g) {
-        System.out.println("Overrided paint()");
-        // this.myPaint();
+        g.drawImage(this.backgroundImg, 0, 0, this);
     }
 }
