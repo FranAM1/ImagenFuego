@@ -16,15 +16,17 @@ public class FireAnimation extends BufferedImage {
         this.setPosY(posY);
         this.setTemperatures(temperatures);
         this.setPalette(palette);
-        this.initAllBlack();
+        this.initAllTransparent();
+        this.run();
+        this.palette.calc();
     }
 
     public void run(){
         this.createImage();
     }
 
-    public void initAllBlack() {
-        Color color = new Color(255, 0, 0, 100);
+    public void initAllTransparent() {
+        Color color = new Color(0, 0, 0, 0);
 
         for (int x = 0; x < this.getWidth(); x++) {
             for (int y = 0; y < this.getHeight(); y++) {
@@ -34,11 +36,11 @@ public class FireAnimation extends BufferedImage {
     }
 
     private void createImage(){
-        temperatures.next();
+        this.temperatures.next();
 
         for(int x = 0; x < this.getWidth(); x++){
             for(int y = 0; y < this.getHeight(); y++){
-                int temp = temperatures.getTemp(x, y);
+                int temp = this.temperatures.getTemp(x, y);
                 int[] colors = palette.getColorsPalette()[temp];
                 Color color = new Color(colors[0], colors[1], colors[2], colors[3]);
                 this.setRGB(x, y, color.getRGB());

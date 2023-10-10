@@ -27,20 +27,28 @@ public class FireTask extends JFrame {
 
     private void addViewerToPane(Container panel) {
         ColorPalette palette = new ColorPalette(new ArrayList<ColorTarget>(){{
-            add(new ColorTarget(250,new Color( 230, 200, 210, 225)));
-            add(new ColorTarget(200,new Color( 180, 150, 175, 200)));
-            add(new ColorTarget(150,new Color( 150, 100, 150, 175)));
-            add(new ColorTarget(100,new Color( 100, 50, 100, 150)));
+            add(new ColorTarget(150, new Color(250, 255, 255, 255)));
+            add(new ColorTarget(130, new Color(255, 255, 200, 255)));
+            add(new ColorTarget(112, new Color(235, 235, 40, 250)));
+            add(new ColorTarget(72, new Color(200, 100, 0, 180)));
+            add(new ColorTarget(60, new Color(155, 0, 0, 110)));
+            add(new ColorTarget(55, new Color(0, 0, 0, 100)));
         }});
 
         this.viewer = new Viewer(700, 700, palette);
         panel.add(this.viewer);
     }
 
-    public void run(){
-    }
-
     public static void main(String[] args) {
         FireTask ft = new FireTask();
+
+        while(true){
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ft.viewer.showNewFrame();
+        }
     }
 }

@@ -1,23 +1,31 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class Viewer extends Canvas {
     private BufferedImage backgroundImg;
     private FireAnimation fa;
+    private BufferStrategy bs;
 
 
     public Viewer(int pixWidth, int pixHeight, ColorPalette palette) {
         Dimension d = new Dimension(pixWidth, pixHeight);
         this.setPreferredSize(d);
         this.loadBackground();
-        this.fa = new FireAnimation(
-                300, 150, 265, 390,
-                new Temperatures(300, 150, 0.1, 0.3),
-                palette
-        );;
 
+        int faWidth = 290;
+        int faHeight = 150;
+        int faPosX = 300;
+        int faPosY = 405;
+
+        this.fa = new FireAnimation(
+                faWidth, faHeight, faPosX, faPosY,
+                new Temperatures(faWidth,faHeight,0.25, 0.09),
+                palette
+        );
+        this.bs = null;
     }
 
 
@@ -34,13 +42,59 @@ public class Viewer extends Canvas {
     }
 
     public void showNewFrame() {
+        checkBufferStrategy();
 
+        Graphics g = bs.getDrawGraphics();
+        this.paintBackground(g);
+        this.fa.run();
+        this.paintFireAnimation(g);
+
+        bs.show();
+        g.dispose();
+    }
+
+    public void paintBackground(Graphics g) {
+        g.drawImage(this.backgroundImg, 0, 0, this.getWidth(), this.getHeight(), null);
+    }
+
+    public void paintFireAnimation(Graphics g) {
+        g.drawImage(this.fa, this.fa.getPosX(), this.fa.getPosY(),this.fa.getWidth(),this.fa.getHeight(), null);
     }
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
-        g.drawImage(this.backgroundImg, 0, 0, null);
-        g.drawImage(this.fa, this.fa.getPosX(), this.fa.getPosY(), null);
+        System.out.println("Overrided paint()");
+    }
+
+    private void checkBufferStrategy(){
+        if (this.bs == null) {
+            System.out.println("kgd");
+            this.createBufferStrategy(2);
+            bs = this.getBufferStrategy();
+        }
+    }
+
+    public BufferedImage getBackgroundImg() {
+        return backgroundImg;
+    }
+
+    public void setBackgroundImg(BufferedImage backgroundImg) {
+        this.backgroundImg = backgroundImg;
+    }
+
+    public FireAnimation getFa() {
+        return fa;
+    }
+
+    public void setFa(FireAnimation fa) {
+        this.fa = fa;
+    }
+
+    public BufferStrategy getBs() {
+        return bs;
+    }
+
+    public void setBs(BufferStrategy bs) {
+        this.bs = bs;
     }
 }
