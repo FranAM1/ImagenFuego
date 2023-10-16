@@ -17,11 +17,11 @@ public class FireAnimation extends BufferedImage {
         this.setTemperatures(temperatures);
         this.setPalette(palette);
         this.initAllTransparent();
-        this.run();
         this.palette.calc();
+        this.next();
     }
 
-    public void run(){
+    public void next(){
         this.createImage();
     }
 

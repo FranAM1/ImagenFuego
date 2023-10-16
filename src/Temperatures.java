@@ -2,8 +2,7 @@ import java.util.Arrays;
 
 public class Temperatures {
     private int[][] temperatures;
-    private int width;
-    private int height;
+    private int width, height;
     private double coldPointsPercentage;
     private double sparksPercentage;
 
@@ -58,7 +57,7 @@ public class Temperatures {
             int[] row = array[i];
             int[] underRow = array[i+1];
 
-            for(int j = 0; j < this.getWidth();j++) {
+            for(int j = 2; j < this.getWidth()-2;j++) {
                 int value = row[j];
 
                 if(j==0) {
