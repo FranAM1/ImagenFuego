@@ -6,11 +6,11 @@ import java.io.*;
 
 public class Viewer extends Canvas {
     private BufferedImage backgroundImg;
-    private FireAnimation foregroundImg;
+    private FireModel foregroundImg;
     private BufferStrategy bs;
 
 
-    public Viewer(int pixWidth, int pixHeight, FireAnimation foregroundImg) {
+    public Viewer(int pixWidth, int pixHeight, FireModel foregroundImg) {
         Dimension d = new Dimension(pixWidth, pixHeight);
         this.setPreferredSize(d);
         this.loadBackground();
@@ -92,11 +92,11 @@ public class Viewer extends Canvas {
         this.bs = bs;
     }
 
-    public FireAnimation getForegroundImg() {
+    public FireModel getForegroundImg() {
         return foregroundImg;
     }
 
-    public void setForegroundImg(FireAnimation foregroundImg) {
+    public void setForegroundImg(FireModel foregroundImg) {
         this.foregroundImg = foregroundImg;
     }
 }

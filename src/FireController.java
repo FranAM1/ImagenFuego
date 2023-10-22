@@ -4,20 +4,17 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import static java.lang.Thread.sleep;
 
-public class FireTask extends JFrame implements ComponentListener, ActionListener, ItemListener {
-    private Viewer viewer;
-    private JButton bForeground;
-    private JButton bBackground;
-    private JToggleButton tbPlay;
-    private FireAnimation animation;
+public class FireController extends JFrame implements ComponentListener, ActionListener, ItemListener {
+    private FireView viewer;
+    private FireModel animation;
 
     public static void main(String[] args) {
-        FireTask ft = new FireTask();
+        FireController ft = new FireController();
 
         ft.playAnimation();
     }
 
-    public FireTask() {
+    public FireController() {
         this.initClass();
         this.configureJFrame();
         this.addUIComponents();
@@ -99,7 +96,7 @@ public class FireTask extends JFrame implements ComponentListener, ActionListene
 
         Temperatures temperatures = new Temperatures(widthAnimation, heightAnimation, 0.25, 0.09);
 
-        this.animation = new FireAnimation(widthAnimation, heightAnimation, 300, 405, temperatures, palette);
+        this.animation = new FireModel(widthAnimation, heightAnimation, 300, 405, temperatures, palette);
     }
 
     private void addViewerToPane(Container panel) {

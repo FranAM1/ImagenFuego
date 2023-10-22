@@ -1,14 +1,13 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Type;
 
-public class FireAnimation extends BufferedImage {
+public class FireModel extends BufferedImage {
     private int width, height;
     private int posX, posY;
     private Temperatures temperatures;
     private ColorPalette palette;
 
-    public FireAnimation(int width, int height, int posX, int posY, Temperatures temperatures, ColorPalette palette){
+    public FireModel(int width, int height, int posX, int posY, Temperatures temperatures, ColorPalette palette){
         super(width, height, BufferedImage.TYPE_INT_ARGB);
         this.setWidth(width);
         this.setHeight(height);
