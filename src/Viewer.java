@@ -57,10 +57,6 @@ public class Viewer extends Canvas {
 
         Graphics g = bs.getDrawGraphics();
         g.drawImage(this.foregroundImg, this.foregroundImg.getPosX(), this.foregroundImg.getPosY(), this.foregroundImg.getWidth(), this.foregroundImg.getHeight(), null);
-        System.out.println("width: " + this.foregroundImg.getWidth());
-        System.out.println("height: " + this.foregroundImg.getHeight());
-        System.out.println("posX: " + this.foregroundImg.getPosX());
-        System.out.println("posY: " + this.foregroundImg.getPosY());
         this.foregroundImg.next();
 
         bs.show();

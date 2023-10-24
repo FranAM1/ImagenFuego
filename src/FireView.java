@@ -86,6 +86,8 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
         }catch (NumberFormatException e){
             this.dtoGeneralParameters.setFireYPosition(0);
         }
+
+
     }
 
     @Override
@@ -100,7 +102,7 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
                 this.controlPanel.getAnimationControls().getPlayPause().setSelected(false);
                 this.stopAnimation();
                 this.updateDTO();
-                this.viewer.getForegroundImg().updateValues(this.dtoGeneralParameters);
+                this.fireController.updateValues();
                 break;
             case "stop":
                 this.controlPanel.getAnimationControls().getPlayPause().setSelected(false);

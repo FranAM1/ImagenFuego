@@ -34,18 +34,6 @@ public class FireModel extends BufferedImage {
         }
     }
 
-    public void updateValues(DTOGeneralParameters dtoGeneralParameters){
-        this.setWidth(dtoGeneralParameters.getFireWidth());
-        this.setHeight(dtoGeneralParameters.getFireHeight());
-        this.setPosX(dtoGeneralParameters.getFireXPosition());
-        this.setPosY(dtoGeneralParameters.getFireYPosition());
-        Temperatures temperatures = new Temperatures(dtoGeneralParameters.getFireWidth(), dtoGeneralParameters.getFireHeight(), 0.25, 0.09);
-        this.setTemperatures(temperatures);
-
-        BufferedImage newImage = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
-        this.setData(newImage.getRaster());
-    }
-
     private void createImage(){
         this.temperatures.next();
 
