@@ -4,8 +4,8 @@ public class ControlPanel extends JPanel {
     private AnimationControls animationControls;
     private GeneralParameters generalParameters;
 
-    public ControlPanel(Viewer viewer, int fireWidth, int fireHeight, int fireXPosition, int fireYPosition) {
-        this.animationControls = new AnimationControls(viewer);
+    public ControlPanel(int fireWidth, int fireHeight, int fireXPosition, int fireYPosition) {
+        this.animationControls = new AnimationControls();
         this.generalParameters = new GeneralParameters(fireWidth, fireHeight, fireXPosition, fireYPosition);
     }
 

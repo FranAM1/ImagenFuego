@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import static java.lang.Thread.sleep;
@@ -21,7 +20,7 @@ public class FireController{
 
     public void playAnimation() {
         while (true) {
-            if (this.fireView.getControlPanel().getAnimationControls().getPlayPauseButton().isSelected()) {
+            if (this.fireView.getControlPanel().getAnimationControls().getPlayPause().isSelected()) {
                 this.fireView.getViewer().paintBackground();
                 this.fireView.getViewer().paintForegroundImage();
             }

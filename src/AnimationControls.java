@@ -1,80 +1,38 @@
 import javax.swing.*;
-import java.awt.event.*;
 
-public class AnimationControls implements ComponentListener, ActionListener, ItemListener {
-    private JToggleButton playPauseButton;
-    private JButton resetButton;
-    private Viewer viewer;
+public class AnimationControls{
+    private JToggleButton playPause;
+    private JButton apply;
+    private JButton stopButton;
 
-    public AnimationControls(Viewer viewer) {
-        this.viewer = viewer;
-        this.playPauseButton = new JToggleButton("playPause");
-        this.resetButton = new JButton("reset");
+    public AnimationControls() {
+        this.playPause = new JToggleButton("playPause");
+        this.apply = new JButton("apply");
+        this.stopButton = new JButton("stop");
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String str = e.getActionCommand();
-        switch (str) {
-            case "playPause":
-                this.viewer.paintBackground();
-                this.viewer.paintForegroundImage();
-                break;
-            case "reset":
-                this.viewer.paintBackground();
-                this.viewer.getBs().show();
-                break;
-            default:
-                System.err.println("Acción NO tratada: " + e);
-        }
+    public JToggleButton getPlayPause() {
+        return playPause;
     }
 
-    @Override
-    public void componentHidden(ComponentEvent ce) {
-        //System.out.println("Frame hidden");
+    public void setPlayPause(JToggleButton playPause) {
+        this.playPause = playPause;
     }
 
-
-    @Override
-    public void componentMoved(ComponentEvent ce) {
-        // System.out.println("Frame moved");
+    public JButton getApply() {
+        return apply;
     }
 
-
-    @Override
-    public void componentResized(ComponentEvent ce) {
-        // System.out.println("Frame resized");
+    public void setApply(JButton apply) {
+        this.apply = apply;
     }
 
-
-    @Override
-    public void componentShown(ComponentEvent ce) {
-        // System.out.println("Frame Shown");
+    public JButton getStopButton() {
+        return stopButton;
     }
 
-
-    @Override
-    public void itemStateChanged(ItemEvent itemEvent) {
-        int estado = itemEvent.getStateChange();
-        if (estado == ItemEvent.SELECTED) {
-        } else {
-        }
-    }
-
-    public JToggleButton getPlayPauseButton() {
-        return playPauseButton;
-    }
-
-    public void setPlayPauseButton(JToggleButton playPauseButton) {
-        this.playPauseButton = playPauseButton;
-    }
-
-    public JButton getResetButton() {
-        return resetButton;
-    }
-
-    public void setResetButton(JButton resetButton) {
-        this.resetButton = resetButton;
+    public void setStopButton(JButton stopButton) {
+        this.stopButton = stopButton;
     }
 
 }

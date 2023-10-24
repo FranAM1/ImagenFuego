@@ -20,6 +20,14 @@ public class Temperatures {
         }
     }
 
+    public void resetTemperatures() {
+        for(int i = 0; i < height;i++){
+            for(int j = 0; j < width;j++){
+                this.temperatures[i][j] = 0;
+            }
+        }
+    }
+
     public void next() {
         creatColdPoints();
         createSparks();
