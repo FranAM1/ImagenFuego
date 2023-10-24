@@ -5,8 +5,10 @@ import static java.lang.Thread.sleep;
 public class FireController{
     private FireView fireView;
     private FireModel fireModel;
+    private DTOGeneralParameters dtoGeneralParameters;
 
     public FireController(){
+        this.dtoGeneralParameters = new DTOGeneralParameters();
         this.initClass();
         this.fireView.pack();
         this.fireView.setVisible(true);
@@ -33,8 +35,8 @@ public class FireController{
     }
 
     private void initClass(){
-        int widthAnimation = 290;
-        int heightAnimation = 150;
+        int widthAnimation = dtoGeneralParameters.getFireWidth();
+        int heightAnimation = dtoGeneralParameters.getFireHeight();
         ColorPalette palette = new ColorPalette(new ArrayList<ColorTarget>(){{
             add(new ColorTarget(150, new Color(250, 255, 255, 255)));
             add(new ColorTarget(130, new Color(255, 255, 200, 255)));
@@ -46,8 +48,12 @@ public class FireController{
 
         Temperatures temperatures = new Temperatures(widthAnimation, heightAnimation, 0.25, 0.09);
 
-        this.fireModel = new FireModel(widthAnimation, heightAnimation, 300, 405, temperatures, palette);
+        this.fireModel = new FireModel(widthAnimation, heightAnimation,
+                dtoGeneralParameters.getFireXPosition(), dtoGeneralParameters.getFireYPosition(),
+                temperatures, palette);
 
-        this.fireView = new FireView(this.fireModel);
+
+        this.fireView = new FireView(this.fireModel, dtoGeneralParameters, this);
+
     }
 }

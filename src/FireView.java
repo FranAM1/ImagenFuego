@@ -5,13 +5,15 @@ import java.awt.event.*;
 public class FireView extends JFrame implements ComponentListener, ActionListener, ItemListener {
     Viewer viewer;
     ControlPanel controlPanel;
+    DTOGeneralParameters dtoGeneralParameters;
+    FireController fireController;
 
-    public FireView(FireModel fireModel){
+    public FireView(FireModel fireModel, DTOGeneralParameters dtoGeneralParameters, FireController fireController){
         this.viewer = new Viewer(700, 700, fireModel);
-        this.controlPanel = new ControlPanel(300, 405, 0, 0);
+        this.controlPanel = new ControlPanel(this, dtoGeneralParameters);
+        this.dtoGeneralParameters = dtoGeneralParameters;
+        this.fireController = fireController;
         this.configureJFrame();
-        addViewerToPane(this.getContentPane());
-        addButtonsToPane(this.getContentPane());
     }
 
     private void configureJFrame(){
@@ -19,17 +21,15 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
         this.setResizable(false);
         this.setLayout(new GridBagLayout());
         this.addComponentListener(this);
+        this.addViewerToPane(this.getContentPane());
+        this.addControlPanelToPane(this.getContentPane());
     }
 
-    private void addButtonsToPane(Container panel) {
+    private void addControlPanelToPane(Container panel){
         GridBagConstraints c = new GridBagConstraints();
-        JToggleButton bPlayPause = this.controlPanel.getAnimationControls().getPlayPause();
-        JButton bApply = this.controlPanel.getAnimationControls().getApply();
-        JButton bStop = this.controlPanel.getAnimationControls().getStopButton();
-
 
         c.anchor = GridBagConstraints.NORTHWEST;
-        c.fill = GridBagConstraints.BOTH;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0;
@@ -37,20 +37,7 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
         c.gridheight = 1;
         c.gridwidth = 1;
 
-        bPlayPause.addActionListener(this);
-        panel.add(bPlayPause, c);
-
-        c.gridy = 1;
-        bApply.addActionListener(this);
-        panel.add(bApply, c);
-
-        c.gridy = 2;
-        bStop.addActionListener(this);
-        panel.add(bStop, c);
-    }
-
-    private void addInputsToPane() {
-        GridBagConstraints c = new GridBagConstraints();
+        panel.add(controlPanel, c);
     }
 
     private void addViewerToPane(Container panel) {
@@ -62,7 +49,7 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-        c.gridheight = 4;
+        c.gridheight = 1;
         c.gridwidth = 1;
 
         panel.add(viewer, c);
@@ -75,21 +62,49 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
         this.viewer.getForegroundImg().initAllTransparent();
     }
 
+    private void updateDTO(){
+        try{
+            this.dtoGeneralParameters.setFireWidth(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireWidth().getText()));
+        }catch (NumberFormatException e){
+            this.dtoGeneralParameters.setFireWidth(0);
+        }
+
+        try{
+            this.dtoGeneralParameters.setFireHeight(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireHeight().getText()));
+        }catch (NumberFormatException e){
+            this.dtoGeneralParameters.setFireHeight(0);
+        }
+
+        try{
+            this.dtoGeneralParameters.setFireXPosition(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireXPosition().getText()));
+        }catch (NumberFormatException e){
+            this.dtoGeneralParameters.setFireXPosition(0);
+        }
+
+        try{
+            this.dtoGeneralParameters.setFireYPosition(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireYPosition().getText()));
+        }catch (NumberFormatException e){
+            this.dtoGeneralParameters.setFireYPosition(0);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String str = e.getActionCommand();
-        System.out.println(str);
         switch (str) {
             case "playPause":
                 this.viewer.paintBackground();
                 this.viewer.paintForegroundImage();
                 break;
             case "apply":
+                this.controlPanel.getAnimationControls().getPlayPause().setSelected(false);
                 this.stopAnimation();
+                this.updateDTO();
+                this.viewer.getForegroundImg().updateValues(this.dtoGeneralParameters);
                 break;
             case "stop":
-                this.stopAnimation();
                 this.controlPanel.getAnimationControls().getPlayPause().setSelected(false);
+                this.stopAnimation();
                 break;
             default:
                 System.err.println("Acción NO tratada: " + e);

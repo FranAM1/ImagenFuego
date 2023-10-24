@@ -14,12 +14,6 @@ public class Temperatures {
         this.setTemperatures(new int[height][width]);
     }
 
-    public void printArray() {
-        for(int i = 0; i < height;i++){
-            System.out.println(Arrays.toString(this.temperatures[i]));
-        }
-    }
-
     public void resetTemperatures() {
         for(int i = 0; i < height;i++){
             for(int j = 0; j < width;j++){
