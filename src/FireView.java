@@ -1,6 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class FireView extends JFrame implements ComponentListener, ActionListener, ItemListener {
     Viewer viewer;
@@ -9,7 +11,7 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
     FireController fireController;
 
     public FireView(FireModel fireModel, DTOGeneralParameters dtoGeneralParameters, FireController fireController){
-        this.viewer = new Viewer(700, 700, fireModel);
+        this.viewer = new Viewer(700, 700, fireModel, dtoGeneralParameters);
         this.controlPanel = new ControlPanel(this, dtoGeneralParameters);
         this.dtoGeneralParameters = dtoGeneralParameters;
         this.fireController = fireController;
@@ -107,6 +109,28 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
             case "stop":
                 this.controlPanel.getAnimationControls().getPlayPause().setSelected(false);
                 this.stopAnimation();
+                break;
+            case "backgroundImage":
+                JFileChooser fileChooser = new JFileChooser();
+
+                int response = fileChooser.showSaveDialog(null);
+
+                if (response == JFileChooser.APPROVE_OPTION) {
+                    //check if the file is an image
+                    String path = fileChooser.getSelectedFile().getAbsolutePath();
+                    if (path.endsWith(".jpg") || path.endsWith(".png") || path.endsWith(".jpeg")) {
+                        try{
+                            this.dtoGeneralParameters.setBackgroundImage(ImageIO.read(new File(path)));
+                        }catch (Exception ex){
+                            System.err.println("Error loading image. ");
+                            System.err.println(ex);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "The file is not an image");
+                    }
+
+                }
+
                 break;
             default:
                 System.err.println("Acción NO tratada: " + e);

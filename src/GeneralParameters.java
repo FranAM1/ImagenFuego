@@ -9,6 +9,8 @@ public class GeneralParameters extends JPanel{
 
     private JTextField calcFramesPerSecond, showFramesPerSecond;
 
+    private JButton backgroundImageButton;
+
     private Image backgroundImage;
 
     public GeneralParameters(ActionListener actionListener, DTOGeneralParameters dtoGeneralParameters) {
@@ -19,7 +21,9 @@ public class GeneralParameters extends JPanel{
         this.fireYPosition = new JTextField(Integer.toString(dtoGeneralParameters.getFireYPosition()));
         this.calcFramesPerSecond = new JTextField("0");
         this.showFramesPerSecond = new JTextField("0");
-        this.backgroundImage = null;
+        this.backgroundImageButton = new JButton("backgroundImage");
+        this.backgroundImageButton.addActionListener(actionListener);
+        this.backgroundImage = dtoGeneralParameters.getBackgroundImage();
         addInputsToPane(this);
     }
 
@@ -30,6 +34,7 @@ public class GeneralParameters extends JPanel{
         JLabel heightLabel = new JLabel("Altura del fuego:");
         JLabel xPositionLabel = new JLabel("Posición inicial X del fuego:");
         JLabel yPositionLabel = new JLabel("Posición inicial Y del fuego:");
+        JLabel backgroundImageLabel = new JLabel("Imagen de fondo:");
 
         c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -59,6 +64,11 @@ public class GeneralParameters extends JPanel{
         panel.add(yPositionLabel, c);
         c.gridy++;
         panel.add(this.fireYPosition, c);
+
+        c.gridy++;
+        panel.add(backgroundImageLabel, c);
+        c.gridy++;
+        panel.add(this.backgroundImageButton, c);
     }
 
     public JTextField getFireWidth() {

@@ -5,42 +5,18 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class Viewer extends Canvas {
-    private BufferedImage backgroundImg;
+    private Image backgroundImg;
     private FireModel foregroundImg;
     private BufferStrategy bs;
+    private DTOGeneralParameters dtoGeneralParameters;
 
 
-    public Viewer(int pixWidth, int pixHeight, FireModel foregroundImg) {
+    public Viewer(int pixWidth, int pixHeight, FireModel foregroundImg, DTOGeneralParameters dtoGeneralParameters) {
         Dimension d = new Dimension(pixWidth, pixHeight);
         this.setPreferredSize(d);
-        this.loadBackground();
+        this.backgroundImg = dtoGeneralParameters.getBackgroundImage();
         this.foregroundImg = foregroundImg;
         this.bs = null;
-    }
-
-
-    private void loadBackground() {
-        try {
-            this.backgroundImg = ImageIO.read(new File("bg.jpg"));
-            System.out.println("Background loaded :-)");
-            System.out.println("Width: " + this.backgroundImg.getWidth());
-            System.out.println("Height: " + this.backgroundImg.getHeight());
-        } catch (IOException e) {
-            System.err.println("Error loading background. ");
-            System.err.println(e);
-        }
-    }
-
-    public void showNewFrame() {
-        checkBufferStrategy();
-
-        Graphics g = bs.getDrawGraphics();
-        this.paintBackground();
-        this.foregroundImg.next();
-        this.paintForegroundImage();
-
-        bs.show();
-        g.dispose();
     }
 
     public void paintBackground() {
@@ -48,6 +24,15 @@ public class Viewer extends Canvas {
 
         Graphics g = bs.getDrawGraphics();
         g.drawImage(this.backgroundImg, 0, 0, this.getWidth(), this.getHeight(), null);
+
+        g.dispose();
+    }
+
+    public void clearBackground() {
+        checkBufferStrategy();
+
+        Graphics g = bs.getDrawGraphics();
+        g.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         g.dispose();
     }
@@ -76,11 +61,11 @@ public class Viewer extends Canvas {
         }
     }
 
-    public BufferedImage getBackgroundImg() {
+    public Image getBackgroundImg() {
         return backgroundImg;
     }
 
-    public void setBackgroundImg(BufferedImage backgroundImg) {
+    public void setBackgroundImg(Image backgroundImg) {
         this.backgroundImg = backgroundImg;
     }
 

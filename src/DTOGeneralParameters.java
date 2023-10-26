@@ -1,4 +1,6 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 
 public class DTOGeneralParameters {
     private int fireWidth, fireHeight;
@@ -14,6 +16,13 @@ public class DTOGeneralParameters {
         this.fireHeight = 150;
         this.fireXPosition = 300;
         this.fireYPosition = 405;
+        try {
+            this.backgroundImage = ImageIO.read(new File("bg.jpg"));
+        } catch (Exception e) {
+            System.err.println("Error loading defafult background. ");
+            System.err.println(e);
+        }
+
     }
 
     public int getFireWidth() {

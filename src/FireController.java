@@ -52,6 +52,7 @@ public class FireController{
                 temperatures, palette);
 
         this.fireView.viewer.setForegroundImg(this.fireModel);
+        this.fireView.viewer.setBackgroundImg(this.dtoGeneralParameters.getBackgroundImage());
     }
 
     private void initClass(){
