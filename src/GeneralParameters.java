@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class GeneralParameters extends JPanel{
     private JTextField fireWidth, fireHeight;
@@ -13,6 +14,8 @@ public class GeneralParameters extends JPanel{
 
     private Image backgroundImage;
 
+    private DTOGeneralParameters dtoGeneralParameters;
+
     public GeneralParameters(ActionListener actionListener, DTOGeneralParameters dtoGeneralParameters) {
         this.setLayout(new GridBagLayout());
         this.fireWidth = new JTextField(Integer.toString(dtoGeneralParameters.getFireWidth()));
@@ -24,6 +27,7 @@ public class GeneralParameters extends JPanel{
         this.backgroundImageButton = new JButton("backgroundImage");
         this.backgroundImageButton.addActionListener(actionListener);
         this.backgroundImage = dtoGeneralParameters.getBackgroundImage();
+        this.dtoGeneralParameters = dtoGeneralParameters;
         addInputsToPane(this);
     }
 
@@ -69,6 +73,27 @@ public class GeneralParameters extends JPanel{
         panel.add(backgroundImageLabel, c);
         c.gridy++;
         panel.add(this.backgroundImageButton, c);
+
+        c.gridy++;
+        JLabel nameImageLabel = new JLabel("Nombre de la imagen: ");
+        panel.add(nameImageLabel, c);
+        c.gridy++;
+        JLabel nameImage = new JLabel(this.dtoGeneralParameters.getImageName());
+        panel.add(nameImage, c);
+
+        c.gridy++;
+        JLabel pathImageLabel = new JLabel("Ruta de la imagen: ");
+        panel.add(pathImageLabel, c);
+        c.gridy++;
+        JLabel pathImage = new JLabel(this.dtoGeneralParameters.getImagePath());
+        panel.add(pathImage, c);
+
+        c.gridy++;
+        JLabel imageResolutionLabel = new JLabel("Resolución de la imagen: ");
+        panel.add(imageResolutionLabel, c);
+        c.gridy++;
+        JLabel imageResolution = new JLabel(backgroundImage.getWidth(null)+"x"+backgroundImage.getHeight(null));
+        panel.add(imageResolution, c);
     }
 
     public JTextField getFireWidth() {

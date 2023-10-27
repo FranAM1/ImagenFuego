@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class DTOGeneralParameters {
@@ -8,6 +9,7 @@ public class DTOGeneralParameters {
     private int fireXPosition, fireYPosition;
 
     private Image backgroundImage;
+    private String imageName, imagePath;
 
     private int calcFramesPerSecond, showFramesPerSecond;
 
@@ -16,13 +18,15 @@ public class DTOGeneralParameters {
         this.fireHeight = 150;
         this.fireXPosition = 300;
         this.fireYPosition = 405;
+        File image = new File("bg.jpg");
         try {
-            this.backgroundImage = ImageIO.read(new File("bg.jpg"));
+            this.backgroundImage = ImageIO.read(image);
         } catch (Exception e) {
             System.err.println("Error loading defafult background. ");
             System.err.println(e);
         }
-
+        this.imageName = image.getName();
+        this.imagePath = image.getAbsolutePath();
     }
 
     public int getFireWidth() {
@@ -79,5 +83,21 @@ public class DTOGeneralParameters {
 
     public void setShowFramesPerSecond(int showFramesPerSecond) {
         this.showFramesPerSecond = showFramesPerSecond;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

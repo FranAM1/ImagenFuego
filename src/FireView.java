@@ -5,10 +5,10 @@ import java.awt.event.*;
 import java.io.File;
 
 public class FireView extends JFrame implements ComponentListener, ActionListener, ItemListener {
-    Viewer viewer;
-    ControlPanel controlPanel;
-    DTOGeneralParameters dtoGeneralParameters;
-    FireController fireController;
+    private Viewer viewer;
+    private ControlPanel controlPanel;
+    private DTOGeneralParameters dtoGeneralParameters;
+    private FireController fireController;
 
     public FireView(FireModel fireModel, DTOGeneralParameters dtoGeneralParameters, FireController fireController){
         this.viewer = new Viewer(700, 700, fireModel, dtoGeneralParameters);
@@ -105,6 +105,8 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
                 this.stopAnimation();
                 this.updateDTO();
                 this.fireController.updateValues();
+                this.viewer.paintBackground();
+                this.viewer.getBs().show();
                 break;
             case "stop":
                 this.controlPanel.getAnimationControls().getPlayPause().setSelected(false);
@@ -126,9 +128,12 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
                             System.err.println(ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "The file is not an image");
+                        JOptionPane.showMessageDialog(null, "Estension not supported");
                     }
 
+                    File image = new File(path);
+                    this.dtoGeneralParameters.setImageName(image.getName());
+                    this.dtoGeneralParameters.setImagePath(image.getAbsolutePath());
                 }
 
                 break;

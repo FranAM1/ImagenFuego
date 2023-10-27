@@ -51,8 +51,8 @@ public class FireController{
                 dtoGeneralParameters.getFireXPosition(), dtoGeneralParameters.getFireYPosition(),
                 temperatures, palette);
 
-        this.fireView.viewer.setForegroundImg(this.fireModel);
-        this.fireView.viewer.setBackgroundImg(this.dtoGeneralParameters.getBackgroundImage());
+        this.fireView.getViewer().setForegroundImg(this.fireModel);
+        this.fireView.getViewer().setBackgroundImg(this.dtoGeneralParameters.getBackgroundImage());
     }
 
     private void initClass(){
@@ -75,6 +75,5 @@ public class FireController{
 
 
         this.fireView = new FireView(this.fireModel, dtoGeneralParameters, this);
-
     }
 }
