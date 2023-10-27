@@ -14,6 +14,8 @@ public class GeneralParameters extends JPanel{
 
     private Image backgroundImage;
 
+    private JLabel nameImage, pathImage, imageResolution;
+
     private DTOGeneralParameters dtoGeneralParameters;
 
     public GeneralParameters(ActionListener actionListener, DTOGeneralParameters dtoGeneralParameters) {
@@ -78,22 +80,28 @@ public class GeneralParameters extends JPanel{
         JLabel nameImageLabel = new JLabel("Nombre de la imagen: ");
         panel.add(nameImageLabel, c);
         c.gridy++;
-        JLabel nameImage = new JLabel(this.dtoGeneralParameters.getImageName());
+        nameImage = new JLabel(this.dtoGeneralParameters.getImageName());
         panel.add(nameImage, c);
 
         c.gridy++;
         JLabel pathImageLabel = new JLabel("Ruta de la imagen: ");
         panel.add(pathImageLabel, c);
         c.gridy++;
-        JLabel pathImage = new JLabel(this.dtoGeneralParameters.getImagePath());
+        pathImage = new JLabel(this.dtoGeneralParameters.getImagePath());
         panel.add(pathImage, c);
 
         c.gridy++;
         JLabel imageResolutionLabel = new JLabel("Resolución de la imagen: ");
         panel.add(imageResolutionLabel, c);
         c.gridy++;
-        JLabel imageResolution = new JLabel(backgroundImage.getWidth(null)+"x"+backgroundImage.getHeight(null));
+        imageResolution = new JLabel(backgroundImage.getWidth(null)+"x"+backgroundImage.getHeight(null));
         panel.add(imageResolution, c);
+    }
+
+    public void updateImageInfo(){
+        nameImage.setText(this.dtoGeneralParameters.getImageName());
+        pathImage.setText(this.dtoGeneralParameters.getImagePath());
+        imageResolution.setText(this.dtoGeneralParameters.getBackgroundImage().getWidth(null)+"x"+this.dtoGeneralParameters.getBackgroundImage().getHeight(null));
     }
 
     public JTextField getFireWidth() {

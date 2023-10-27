@@ -107,6 +107,7 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
                 this.fireController.updateValues();
                 this.viewer.paintBackground();
                 this.viewer.getBs().show();
+                this.controlPanel.getGeneralParameters().updateImageInfo();
                 break;
             case "stop":
                 this.controlPanel.getAnimationControls().getPlayPause().setSelected(false);
