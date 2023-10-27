@@ -101,7 +101,9 @@ public class GeneralParameters extends JPanel{
     public void updateImageInfo(){
         nameImage.setText(this.dtoGeneralParameters.getImageName());
         pathImage.setText(this.dtoGeneralParameters.getImagePath());
-        imageResolution.setText(this.dtoGeneralParameters.getBackgroundImage().getWidth(null)+"x"+this.dtoGeneralParameters.getBackgroundImage().getHeight(null));
+        imageResolution.setText(this.dtoGeneralParameters.getBackgroundImage().getWidth(null)+
+                "x"+
+                this.dtoGeneralParameters.getBackgroundImage().getHeight(null));
     }
 
     public JTextField getFireWidth() {

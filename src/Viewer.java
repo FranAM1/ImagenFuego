@@ -8,7 +8,6 @@ public class Viewer extends Canvas {
     private Image backgroundImg;
     private FireModel foregroundImg;
     private BufferStrategy bs;
-    private DTOGeneralParameters dtoGeneralParameters;
 
 
     public Viewer(int pixWidth, int pixHeight, FireModel foregroundImg, DTOGeneralParameters dtoGeneralParameters) {
@@ -24,15 +23,6 @@ public class Viewer extends Canvas {
 
         Graphics g = bs.getDrawGraphics();
         g.drawImage(this.backgroundImg, 0, 0, this.getWidth(), this.getHeight(), null);
-
-        g.dispose();
-    }
-
-    public void clearBackground() {
-        checkBufferStrategy();
-
-        Graphics g = bs.getDrawGraphics();
-        g.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         g.dispose();
     }
