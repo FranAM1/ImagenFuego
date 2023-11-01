@@ -59,20 +59,23 @@ public class Temperatures {
             int[] row = array[i];
             int[] underRow = array[i+1];
 
-            for(int j = 2; j < this.getWidth()-2;j++) {
-                int value = row[j];
+            row[0] = 0;
+            row[this.getWidth()-1] = 0;
+            for(int j = 1; j < this.getWidth()-2;j++) {
 
-                if(j==0) {
-                    value += underRow[j] + underRow[j+1];
-                }
-                else if(j==this.getWidth()-1){
-                    value += underRow[j] + underRow[j-1];
-                }
-                else {
-                    value += underRow[j-1] + underRow[j] + underRow[j+1];
-                }
+                row[j] = ((int) ((row[j-1] * 1.2
+                        + row[j] * 1.5
+                        + row[j+1] * 1.2
+                        + underRow[j-1] * 0.7
+                        + underRow[j] * 0.7
+                        + underRow[j+1] * 0.7) / 6
+                        - 1.8));
 
-                row[j] = value/4;
+                if (row[j] < 0) {
+                    row[j] = 0;
+                }else if(row[j] > 255){
+                    row[j] = 255;
+                }
             }
         }
     }
