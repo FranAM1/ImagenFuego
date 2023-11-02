@@ -13,15 +13,15 @@ public class TemperatureConfiguration extends JPanel{
 
     public TemperatureConfiguration(ActionListener actionListener, TemperatureParameters temperatureParameters) {
         this.setLayout(new GridBagLayout());
-        this.newColdPixelPercentage = new JSlider(0, 50, this.doublePercentageToInt(temperatureParameters.getNewColdPixelPercentage()));
-        this.newColdPixelPercentage.setMajorTickSpacing(10);
-        this.newColdPixelPercentage.setMinorTickSpacing(5);
+        this.newColdPixelPercentage = new JSlider(0, 100, this.doublePercentageToInt(temperatureParameters.getNewColdPixelPercentage()));
+        this.newColdPixelPercentage.setMajorTickSpacing(25);
+        this.newColdPixelPercentage.setMinorTickSpacing(10);
         this.newColdPixelPercentage.setPaintTicks(true);
         this.newColdPixelPercentage.setPaintLabels(true);
 
-        this.newHotPixelPercentage = new JSlider(0, 50, this.doublePercentageToInt(temperatureParameters.getNewHotPixelPercentage()));
-        this.newHotPixelPercentage.setMajorTickSpacing(10);
-        this.newHotPixelPercentage.setMinorTickSpacing(5);
+        this.newHotPixelPercentage = new JSlider(0, 100, this.doublePercentageToInt(temperatureParameters.getNewHotPixelPercentage()));
+        this.newHotPixelPercentage.setMajorTickSpacing(25);
+        this.newHotPixelPercentage.setMinorTickSpacing(10);
         this.newHotPixelPercentage.setPaintTicks(true);
         this.newHotPixelPercentage.setPaintLabels(true);
 
@@ -35,20 +35,21 @@ public class TemperatureConfiguration extends JPanel{
             }
         }
 
-        this.cellsDivider = new JSlider(0, 50, this.doublePercentageToInt(temperatureParameters.getCellsDivider()));
-        this.cellsDivider.setMajorTickSpacing(10);
-        this.cellsDivider.setMinorTickSpacing(5);
+        this.cellsDivider = new JSlider(0, 1000, this.doublePercentageToInt(temperatureParameters.getCellsDivider()));
+        this.cellsDivider.setMajorTickSpacing(250);
+        this.cellsDivider.setMinorTickSpacing(100);
         this.cellsDivider.setPaintTicks(true);
         this.cellsDivider.setPaintLabels(true);
 
-        this.fixAttenuationFactor = new JSlider(0, 50, this.doublePercentageToInt(temperatureParameters.getFixAtenuationFactor()));
-        this.fixAttenuationFactor.setMajorTickSpacing(10);
-        this.fixAttenuationFactor.setMinorTickSpacing(5);
+        this.fixAttenuationFactor = new JSlider(0, 1000, this.doublePercentageToInt(temperatureParameters.getFixAtenuationFactor()));
+        this.fixAttenuationFactor.setMajorTickSpacing(250);
+        this.fixAttenuationFactor.setMinorTickSpacing(100);
         this.fixAttenuationFactor.setPaintTicks(true);
         this.fixAttenuationFactor.setPaintLabels(true);
 
 
         this.bottonUpTemps = new JToggleButton("bottonUpTemps");
+        this.bottonUpTemps.addActionListener(actionListener);
         addConfigurationToPane(this);
     }
 

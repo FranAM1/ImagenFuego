@@ -68,20 +68,44 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
     }
 
     private void updateDTO() {
-            this.dtoGeneralParameters.setFireWidth(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireWidth().getText()));
+            this.dtoGeneralParameters.setFireWidth(Integer.parseInt(
+                    this.controlPanel.getGeneralParameters().getFireWidth().getText()));
 
 
-            this.dtoGeneralParameters.setFireHeight(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireHeight().getText()));
+            this.dtoGeneralParameters.setFireHeight(Integer.parseInt(
+                    this.controlPanel.getGeneralParameters().getFireHeight().getText()));
 
 
-            this.dtoGeneralParameters.setFireXPosition(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireXPosition().getText()));
+            this.dtoGeneralParameters.setFireXPosition(Integer.parseInt(
+                    this.controlPanel.getGeneralParameters().getFireXPosition().getText()));
 
 
-            this.dtoGeneralParameters.setFireYPosition(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireYPosition().getText()));
+            this.dtoGeneralParameters.setFireYPosition(Integer.parseInt(
+                    this.controlPanel.getGeneralParameters().getFireYPosition().getText()));
 
-            this.temperatureParameters.setNewColdPixelPercentage(this.controlPanel.getTemperatureConfiguration().getNewColdPixelPercentage().getValue()/100.0);
+            this.temperatureParameters.setNewColdPixelPercentage(
+                    this.controlPanel.getTemperatureConfiguration().getNewColdPixelPercentage().getValue()/100.0);
 
-            this.temperatureParameters.setNewHotPixelPercentage(this.controlPanel.getTemperatureConfiguration().getNewHotPixelPercentage().getValue()/100.0);
+            this.temperatureParameters.setNewHotPixelPercentage(
+                    this.controlPanel.getTemperatureConfiguration().getNewHotPixelPercentage().getValue()/100.0);
+
+            double[][] cellsPonderation = new double[2][3];
+
+            for (int i = 0; i < this.temperatureParameters.getCellsPonderation().length; i++) {
+                for (int j = 0; j < this.temperatureParameters.getCellsPonderation()[i].length; j++) {
+                    cellsPonderation[i][j] =
+                            Double.parseDouble(this.controlPanel.getTemperatureConfiguration().
+                            getCellsPonderation().getValueAt(i, j).toString());
+                }
+            }
+
+            this.temperatureParameters.setCellsPonderation(cellsPonderation);
+
+            this.temperatureParameters.setCellsDivider(
+                    this.controlPanel.getTemperatureConfiguration().getCellsDivider().getValue()/100.0);
+
+            this.temperatureParameters.setFixAtenuationFactor(
+                    this.controlPanel.getTemperatureConfiguration().getFixAttenuationFactor().getValue()/100.0);
     }
 
     @Override
@@ -129,6 +153,10 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
                     this.dtoGeneralParameters.setImagePath(image.getAbsolutePath());
                 }
 
+                break;
+            case "bottonUpTemps":
+                this.temperatureParameters.setBottonUpTemps(!this.temperatureParameters.getBottonUpTemps());
+                System.out.println("bottonUpTemps: " + this.temperatureParameters.getBottonUpTemps());
                 break;
             default:
                 System.err.println("Acción NO tratada: " + e);

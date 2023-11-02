@@ -27,7 +27,12 @@ public class Temperatures {
     public void next() {
         creatColdPoints();
         createSparks();
-        calc();
+        if (this.temperatureParameters.getBottonUpTemps()){
+            reverseCalc();
+        }else{
+            calc();
+        }
+
    }
 
    public int getTemp(int x, int y){
@@ -70,8 +75,36 @@ public class Temperatures {
                         + row[j+1] * temperatureParameters.getCellsPonderation()[0][2]
                         + underRow[j-1] * temperatureParameters.getCellsPonderation()[1][0]
                         + underRow[j] * temperatureParameters.getCellsPonderation()[1][1]
-                        + underRow[j+1] * temperatureParameters.getCellsPonderation()[1][2]) / 6
-                        - 1.8));
+                        + underRow[j+1] * temperatureParameters.getCellsPonderation()[1][2]) / temperatureParameters.getCellsDivider()
+                        - this.temperatureParameters.getFixAtenuationFactor()));
+
+                if (row[j] < 0) {
+                    row[j] = 0;
+                }else if(row[j] > 255){
+                    row[j] = 255;
+                }
+            }
+        }
+    }
+
+    private void reverseCalc(){
+        int[][] array = this.temperatures;
+
+        for(int i = 0; i > this.getHeight()-2;i++) {
+            int[] row = array[i];
+            int[] underRow = array[i+1];
+
+            row[0] = 0;
+            row[this.getWidth()-1] = 0;
+            for(int j = 1; j < this.getWidth()-2;j++) {
+
+                row[j] = ((int) ((row[j-1] * temperatureParameters.getCellsPonderation()[0][0]
+                        + row[j] * temperatureParameters.getCellsPonderation()[0][1]
+                        + row[j+1] * temperatureParameters.getCellsPonderation()[0][2]
+                        + underRow[j-1] * temperatureParameters.getCellsPonderation()[1][0]
+                        + underRow[j] * temperatureParameters.getCellsPonderation()[1][1]
+                        + underRow[j+1] * temperatureParameters.getCellsPonderation()[1][2]) / temperatureParameters.getCellsDivider()
+                        - this.temperatureParameters.getFixAtenuationFactor()));
 
                 if (row[j] < 0) {
                     row[j] = 0;

@@ -17,8 +17,8 @@ public class TemperatureParameters {
             {1.2, 1.5, 1.2},
             {0.7, 0.7, 0.7},
         };
-        this.cellsDivider = 0.0;
-        this.fixAtenuationFactor = 0.0;
+        this.cellsDivider = 5.87;
+        this.fixAtenuationFactor = 1.8;
         this.bottonUpTemps = false;
     }
 
@@ -62,7 +62,7 @@ public class TemperatureParameters {
         this.fixAtenuationFactor = fixAtenuationFactor;
     }
 
-    public boolean isBottonUpTemps() {
+    public boolean getBottonUpTemps() {
         return bottonUpTemps;
     }
 
