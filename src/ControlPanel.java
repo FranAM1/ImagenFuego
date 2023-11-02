@@ -6,10 +6,13 @@ public class ControlPanel extends JPanel {
     private AnimationControls animationControls;
     private GeneralParameters generalParameters;
 
-    public ControlPanel(ActionListener actionListener, DTOGeneralParameters dtoGeneralParameters) {
+    private TemperatureConfiguration temperatureConfiguration;
+
+    public ControlPanel(ActionListener actionListener, DTOGeneralParameters dtoGeneralParameters, TemperatureParameters temperatureParameters) {
         this.setLayout(new GridBagLayout());
         this.animationControls = new AnimationControls(actionListener);
         this.generalParameters = new GeneralParameters(actionListener, dtoGeneralParameters);
+        this.temperatureConfiguration = new TemperatureConfiguration(actionListener, temperatureParameters);
         addConfigurationToPane(this);
     }
 
@@ -31,6 +34,8 @@ public class ControlPanel extends JPanel {
         c.gridy++;
         panel.add(this.generalParameters, c);
 
+        c.gridx++;
+        panel.add(this.temperatureConfiguration, c);
     }
 
     public AnimationControls getAnimationControls() {
@@ -47,5 +52,13 @@ public class ControlPanel extends JPanel {
 
     public void setGeneralParameters(GeneralParameters generalParameters) {
         this.generalParameters = generalParameters;
+    }
+
+    public TemperatureConfiguration getTemperatureConfiguration() {
+        return temperatureConfiguration;
+    }
+
+    public void setTemperatureConfiguration(TemperatureConfiguration temperatureConfiguration) {
+        this.temperatureConfiguration = temperatureConfiguration;
     }
 }

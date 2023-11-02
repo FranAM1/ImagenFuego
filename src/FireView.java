@@ -8,12 +8,15 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
     private Viewer viewer;
     private ControlPanel controlPanel;
     private DTOGeneralParameters dtoGeneralParameters;
+    private TemperatureParameters temperatureParameters;
     private FireController fireController;
 
-    public FireView(FireModel fireModel, DTOGeneralParameters dtoGeneralParameters, FireController fireController){
+    public FireView(FireModel fireModel, DTOGeneralParameters dtoGeneralParameters,
+                    FireController fireController, TemperatureParameters temperatureParameters){
         this.viewer = new Viewer(700, 700, fireModel, dtoGeneralParameters);
-        this.controlPanel = new ControlPanel(this, dtoGeneralParameters);
+        this.controlPanel = new ControlPanel(this, dtoGeneralParameters, temperatureParameters);
         this.dtoGeneralParameters = dtoGeneralParameters;
+        this.temperatureParameters = temperatureParameters;
         this.fireController = fireController;
         this.configureJFrame();
     }
@@ -64,32 +67,21 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
         this.viewer.getForegroundImg().initAllTransparent();
     }
 
-    private void updateDTO(){
-        try{
+    private void updateDTO() {
             this.dtoGeneralParameters.setFireWidth(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireWidth().getText()));
-        }catch (NumberFormatException e){
-            this.dtoGeneralParameters.setFireWidth(0);
-        }
 
-        try{
+
             this.dtoGeneralParameters.setFireHeight(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireHeight().getText()));
-        }catch (NumberFormatException e){
-            this.dtoGeneralParameters.setFireHeight(0);
-        }
 
-        try{
+
             this.dtoGeneralParameters.setFireXPosition(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireXPosition().getText()));
-        }catch (NumberFormatException e){
-            this.dtoGeneralParameters.setFireXPosition(0);
-        }
 
-        try{
+
             this.dtoGeneralParameters.setFireYPosition(Integer.parseInt(this.controlPanel.getGeneralParameters().getFireYPosition().getText()));
-        }catch (NumberFormatException e){
-            this.dtoGeneralParameters.setFireYPosition(0);
-        }
 
+            this.temperatureParameters.setNewColdPixelPercentage(this.controlPanel.getTemperatureConfiguration().getNewColdPixelPercentage().getValue()/100.0);
 
+            this.temperatureParameters.setNewHotPixelPercentage(this.controlPanel.getTemperatureConfiguration().getNewHotPixelPercentage().getValue()/100.0);
     }
 
     @Override

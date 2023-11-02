@@ -5,13 +5,15 @@ public class Temperatures {
     private int width, height;
     private double coldPointsPercentage;
     private double sparksPercentage;
+    private TemperatureParameters temperatureParameters;
 
-    public Temperatures(int width, int height, double percentageColdPoints, double percentageSparks) {
+    public Temperatures(int width, int height, double percentageColdPoints, double percentageSparks, TemperatureParameters temperatureParameters) {
         this.setWidth(width);
         this.setHeight(height);
         this.setColdPointsPercentage(percentageColdPoints);
         this.setSparksPercentage(percentageSparks);
         this.setTemperatures(new int[height][width]);
+        this.temperatureParameters = temperatureParameters;
     }
 
     public void resetTemperatures() {
@@ -63,12 +65,12 @@ public class Temperatures {
             row[this.getWidth()-1] = 0;
             for(int j = 1; j < this.getWidth()-2;j++) {
 
-                row[j] = ((int) ((row[j-1] * 1.2
-                        + row[j] * 1.5
-                        + row[j+1] * 1.2
-                        + underRow[j-1] * 0.7
-                        + underRow[j] * 0.7
-                        + underRow[j+1] * 0.7) / 6
+                row[j] = ((int) ((row[j-1] * temperatureParameters.getCellsPonderation()[0][0]
+                        + row[j] * temperatureParameters.getCellsPonderation()[0][1]
+                        + row[j+1] * temperatureParameters.getCellsPonderation()[0][2]
+                        + underRow[j-1] * temperatureParameters.getCellsPonderation()[1][0]
+                        + underRow[j] * temperatureParameters.getCellsPonderation()[1][1]
+                        + underRow[j+1] * temperatureParameters.getCellsPonderation()[1][2]) / 6
                         - 1.8));
 
                 if (row[j] < 0) {
