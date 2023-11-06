@@ -7,11 +7,14 @@ public class FireController{
     private FireModel fireModel;
     private DTOGeneralParameters dtoGeneralParameters;
 
+    private PaletteParameters paletteParameters;
+
     private TemperatureParameters temperatureParameters;
 
     public FireController(){
         this.dtoGeneralParameters = new DTOGeneralParameters();
         this.temperatureParameters = new TemperatureParameters();
+        this.paletteParameters = new PaletteParameters();
         this.initClass();
         this.fireView.pack();
         this.fireView.setVisible(true);
@@ -42,14 +45,7 @@ public class FireController{
         Temperatures temperatures = new Temperatures(dtoGeneralParameters.getFireWidth(), dtoGeneralParameters.getFireHeight(),
                 this.temperatureParameters.getNewColdPixelPercentage(), this.temperatureParameters.getNewHotPixelPercentage(), this.temperatureParameters);
 
-        ColorPalette palette = new ColorPalette(new ArrayList<ColorTarget>(){{
-            add(new ColorTarget(150, new Color(250, 255, 255, 255)));
-            add(new ColorTarget(130, new Color(255, 255, 200, 255)));
-            add(new ColorTarget(112, new Color(235, 235, 40, 250)));
-            add(new ColorTarget(72, new Color(200, 100, 0, 180)));
-            add(new ColorTarget(60, new Color(155, 0, 0, 110)));
-            add(new ColorTarget(55, new Color(0, 0, 0, 100)));
-        }});
+        ColorPalette palette = new ColorPalette(this.paletteParameters.getColorsTargets());
 
         this.fireModel = new FireModel(dtoGeneralParameters.getFireWidth(), dtoGeneralParameters.getFireHeight(),
                 dtoGeneralParameters.getFireXPosition(), dtoGeneralParameters.getFireYPosition(),
@@ -62,14 +58,7 @@ public class FireController{
     private void initClass(){
         int widthAnimation = dtoGeneralParameters.getFireWidth();
         int heightAnimation = dtoGeneralParameters.getFireHeight();
-        ColorPalette palette = new ColorPalette(new ArrayList<ColorTarget>(){{
-            add(new ColorTarget(150, new Color(250, 255, 255, 255)));
-            add(new ColorTarget(130, new Color(255, 255, 200, 255)));
-            add(new ColorTarget(112, new Color(235, 235, 40, 250)));
-            add(new ColorTarget(72, new Color(200, 100, 0, 180)));
-            add(new ColorTarget(60, new Color(155, 0, 0, 110)));
-            add(new ColorTarget(55, new Color(0, 0, 0, 100)));
-        }});
+        ColorPalette palette = new ColorPalette(this.paletteParameters.getColorsTargets());
 
         Temperatures temperatures = new Temperatures(widthAnimation, heightAnimation,
                 temperatureParameters.getNewColdPixelPercentage(), temperatureParameters.getNewHotPixelPercentage(), this.temperatureParameters);
@@ -79,6 +68,7 @@ public class FireController{
                 temperatures, palette);
 
 
-        this.fireView = new FireView(this.fireModel, this.dtoGeneralParameters, this, this.temperatureParameters);
+        this.fireView = new FireView(this.fireModel, this.dtoGeneralParameters, this,
+                this.temperatureParameters, this.paletteParameters);
     }
 }

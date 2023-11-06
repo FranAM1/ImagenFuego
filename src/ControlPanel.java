@@ -5,14 +5,17 @@ import java.awt.event.ActionListener;
 public class ControlPanel extends JPanel {
     private AnimationControls animationControls;
     private GeneralParameters generalParameters;
+    private PaletteConfiguration paletteConfiguration;
 
     private TemperatureConfiguration temperatureConfiguration;
 
-    public ControlPanel(ActionListener actionListener, DTOGeneralParameters dtoGeneralParameters, TemperatureParameters temperatureParameters) {
+    public ControlPanel(ActionListener actionListener, DTOGeneralParameters dtoGeneralParameters,
+                        TemperatureParameters temperatureParameters, PaletteParameters paletteParameters) {
         this.setLayout(new GridBagLayout());
         this.animationControls = new AnimationControls(actionListener);
         this.generalParameters = new GeneralParameters(actionListener, dtoGeneralParameters);
         this.temperatureConfiguration = new TemperatureConfiguration(actionListener, temperatureParameters);
+        this.paletteConfiguration = new PaletteConfiguration(actionListener, paletteParameters);
         addConfigurationToPane(this);
     }
 
@@ -36,6 +39,9 @@ public class ControlPanel extends JPanel {
 
         c.gridx++;
         panel.add(this.temperatureConfiguration, c);
+
+        c.gridx++;
+        panel.add(this.paletteConfiguration, c);
     }
 
     public AnimationControls getAnimationControls() {

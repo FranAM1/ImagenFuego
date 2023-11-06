@@ -12,9 +12,10 @@ public class FireView extends JFrame implements ComponentListener, ActionListene
     private FireController fireController;
 
     public FireView(FireModel fireModel, DTOGeneralParameters dtoGeneralParameters,
-                    FireController fireController, TemperatureParameters temperatureParameters){
+                    FireController fireController, TemperatureParameters temperatureParameters,
+                    PaletteParameters paletteParameters){
         this.viewer = new Viewer(700, 700, fireModel, dtoGeneralParameters);
-        this.controlPanel = new ControlPanel(this, dtoGeneralParameters, temperatureParameters);
+        this.controlPanel = new ControlPanel(this, dtoGeneralParameters, temperatureParameters, paletteParameters);
         this.dtoGeneralParameters = dtoGeneralParameters;
         this.temperatureParameters = temperatureParameters;
         this.fireController = fireController;
