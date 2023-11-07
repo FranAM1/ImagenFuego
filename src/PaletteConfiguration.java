@@ -1,14 +1,16 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionListener;
+
 
 public class PaletteConfiguration extends JPanel {
 
     JScrollPane palette;
 
     private JTextField temperaturas;
+
+    private JColorChooser colorChooser;
 
 
 
@@ -35,13 +37,35 @@ public class PaletteConfiguration extends JPanel {
             int alpha = paletteParameters.getColorsTargets().get(i).getColor().getAlpha();
             table.setValueAt(red+" | "+green+" | "+blue+" | "+alpha, i, 1);
 
+
+
+            table.setValueAt("#"+String.format("%02x%02x%02x", red, green, blue), i, 2);
         }
+
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = table.rowAtPoint(evt.getPoint());
+                int col = table.columnAtPoint(evt.getPoint());
+                if (col == 2) {
+                    Color color = JColorChooser.showDialog(null, "Seleccione un color", Color.BLACK);
+                    if (color != null) {
+                        table.setValueAt(color.getRed()+" | "+color.getGreen()+" | "+color.getBlue()+" | "+color.getBlue(), row, 1);
+
+                        table.setValueAt("#"+String.format("%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue()), row, col);
+                    }
+                }
+            }
+        });
 
         this.palette = new JScrollPane(table);
         this.palette.setPreferredSize(new Dimension(420, 100));
 
-        // CONFIGURACION DE  DEL TEXTFIELD DE LA TEMEPERATURA
+        // CONFIGURACION DEL TEXTFIELD DE LA TEMEPERATURA
         this.temperaturas = new JTextField("0");
+
+        //CONFIGURACION DEL COLORCHOOSER
+        this.colorChooser = new JColorChooser();
 
 
 
@@ -53,6 +77,7 @@ public class PaletteConfiguration extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
 
         JLabel temperaturasLabel = new JLabel("Valor de la temperatura:");
+        JLabel colorChooserLabel = new JLabel("Color:");
 
         c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -67,6 +92,11 @@ public class PaletteConfiguration extends JPanel {
         panel.add(temperaturasLabel, c);
         c.gridy++;
         panel.add(temperaturas, c);
+
+        c.gridy++;
+        panel.add(colorChooserLabel, c);
+//        c.gridy++;
+//        panel.add(colorChooser, c);
 
         c.gridy++;
         panel.add(palette, c);
